@@ -3,13 +3,14 @@ package home_work_1;
 public class MathClass {
     public static void main(String[] args) {
         int a = -15;
+        int b = 67;
+
         System.out.println(Math.abs(a)); // возвращает модуль числа
 
-        int b = 67;
-        System.out.println("Максимальное число среди a и b - это " + Math.max(a, b)); // возвращает максимальное среди двух значение
+        System.out.println("Максимальное число среди a и b - это " + Math.max(a, b)); // возвращает максимальное среди двух значений
         System.out.println("Минимальное число среди a и b - это " + Math.min(a, b)); // возвращает минимальное значение
 
-        int c = Math.addExact(a,b);
+        int c = Math.addExact(a,b); // складывает числа, причем выдает ошибку если происходит переполнение данных
         System.out.println(c);
 
         int d = 729;
@@ -32,25 +33,32 @@ public class MathClass {
 
         System.out.println(Math.pow(b, 2)); // возводит первое в степень второго, работает с double, поэтому преобразовал int
 
-        int g = (int)(Math.random()*100); // генерирует псевдо-рандомный double от 0.0 до 1.0, для получаения int требует приведение типов
+        int g = (int)(Math.random()*100); // генерирует псевдо-рандомный double от 0.0 до 1.0, для получаения int требует приведения типов
         System.out.println(g);
 
         int b2 = (int)(Math.random()*100);
         if (b == b2){
-            System.out.println("Вот это успех! Рандомное число равно " + b + "! Сегодня ты счастливчик, купи лотерейный билет");
+            System.out.println("Вот это успех! Рандомное число совпало с заданным числом " + b + "! Сегодня ты счастливчик, купи лотерейный билет");
         }
-        else
-            System.out.println("Шансы были малы, но ты пытался :/");
 
+        System.out.println();
+
+        massive();
+    }
+
+    public static void massive(){
         int []massive = new int[(int)(Math.random()*10)];
         for (int i = 0; i < massive.length; i++){
             massive[i] = (int)(Math.random()*100);
         }
-        System.out.print("У нас есть массив случайного размера со случайными числами: ");
-        for (int i = 0; i < massive.length; i++){
-            System.out.print(massive[i] + ", ");
+        System.out.print("У нас есть массив случайного размера со случайными числами: {");
+        for (int i = 0; i < massive.length; i++) {
+            if (i != massive.length - 1) {
+                System.out.print(massive[i] + ", ");
+            } else {
+                System.out.println(massive[i] + "}");
+            }
         }
-        System.out.println();
         System.out.print("В этом массиве наибольшее число: ");
         for (int i = 0; i < (massive.length-1); i++){
             massive[i+1]=Math.max(massive[i], massive[i+1]);

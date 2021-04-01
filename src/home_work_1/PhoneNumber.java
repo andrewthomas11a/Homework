@@ -7,6 +7,9 @@ public class PhoneNumber {
             System.out.println("Нужно больше цифр!");
         }else{
         String number = createPhoneNumber(arr);
+        /*
+        нужно разобраться, есть ли смысл создавать переменную и сохранять в ней результат,
+        либо можно сразу печатать результат работы метода (понять как хранится значение переменной типа String в памяти)*/
         System.out.println(number);}
     }
 
