@@ -19,14 +19,15 @@ public class BinaryString {
         int[] array = new int[8];
         for (int i = 0; i < array.length; i++) {
             array[array.length-1-i]=(int)(Math.abs(number)/(Math.pow(2, i)))%2;
-            // здесь модуль числа перевели в двоичную систему прямым кодом
+            /* записываем в массив результат пошагового деления модуля принятого числа на 2,
+            т.е. переводим его в двоичную систему прямым кодом и каждый разряд записываем в массив */
         }
         if (number >= 0) {
             return ("" + array[0] + array[1] + array[2] + array[3] + array[4] + array[5] + array[6] + array[7]);
         }else {
             for (int i = 0; i < array.length; i++) {
                 array[i] = array[i]==1 ? 0 : 1;
-                // произвели инверсию (обратный код)
+                // произвели инверсию (обратный код), все 1 в массивы поменяли на 0 и наоборот
             }
             for (int i = 0; i < array.length; i++) {
                 if (array[array.length - 1 - i] == 0) {
