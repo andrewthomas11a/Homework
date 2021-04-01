@@ -1,5 +1,7 @@
 package home_work_1;
 
+import java.util.Arrays;
+
 public class MathClass {
     public static void main(String[] args) {
         int a = -15;
@@ -47,7 +49,7 @@ public class MathClass {
     }
 
     public static void massive(){
-        int []massive = new int[(int)(Math.random()*10)];
+        int[] massive = new int[(int)(Math.random()*10)];
         for (int i = 0; i < massive.length; i++){
             massive[i] = (int)(Math.random()*100);
         }
@@ -59,6 +61,9 @@ public class MathClass {
                 System.out.println(massive[i] + "}");
             }
         }
+        // можно было заменить на
+        // System.out.println("У нас есть массив случайного размера со случайными числами: " + Arrays.toString(massive));
+
         System.out.print("В этом массиве наибольшее число: ");
         for (int i = 0; i < (massive.length-1); i++){
             massive[i+1]=Math.max(massive[i], massive[i+1]);
