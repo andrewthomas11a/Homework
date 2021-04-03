@@ -8,3 +8,4 @@
 					- Name3.java (switch)
 Задание 6 (формат телефона)		- PhoneNumber.java
 Задание 7 (перевод в двоичную)		- BinaryString.java
+					- BinaryString2.java (после сдачи домашки, изменен способ печати массива)
