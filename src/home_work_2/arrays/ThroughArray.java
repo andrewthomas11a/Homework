@@ -2,13 +2,13 @@ package home_work_2.arrays;
 
 public class ThroughArray {
     public static void main(String[] args) {
-    int[] array = ArraysUtils.arrayFromConsole();
-    if (array.length>0){
-        arrayToConsole(array);
-        everySecondToConsole(array);
-        arrayToConsoleReverse(array);
-    }else{
-        System.out.println("Невозможно выполнить методы, т.к. размер массива равен 0.");
+        int[] array = ArraysUtils.arrayFromConsole();
+        if (array.length>0){
+            arrayToConsole(array);
+            everySecondToConsole(array);
+            arrayToConsoleReverse(array);
+        }else{
+            System.out.println("Невозможно выполнить методы, т.к. создан пустой массив");
     }
 
     }
@@ -101,14 +101,18 @@ public class ThroughArray {
         }
         System.out.println("\b\b");
 
-        // вроде foreach нельзя заставить работать в обратном порядке, поэтому придется для начала изменить массив
-        int thirdGlass = 0;
-        for (int i = 0; i < array.length/2; i++) {
-            thirdGlass = array[i];
-            array[i] = array[array.length-1-i];
-            array[array.length-1-i] = thirdGlass;
+        /*
+        вроде foreach нельзя заставить работать в обратном порядке, поэтому придется для начала изменить массив
+        но при использовании foreach нельзя менять сам элемент массива, можно менять только итерационную переменную,
+        поэтому нужно создать новый массив, длина которого равна длине нашего массива, и с конца присваивать ему элементы нашего массива
+        */
+        int[] array1 = new int[array.length];
+        int element = array.length-1;
+        for (int i : array){
+            array1[element] = i;
+            element--;
         }
-        for (int i : array) {
+        for (int i : array1) {
             System.out.print(i +"; ");
         }
         System.out.println("\b\b");
