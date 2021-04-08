@@ -41,7 +41,6 @@ public class ArraysUtils {
                 }
             }
         }
-        input.close();
         return array;
     }
 

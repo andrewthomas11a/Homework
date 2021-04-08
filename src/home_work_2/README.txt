@@ -12,7 +12,11 @@
 Задание 2 (массивы)
 	Задание 2.1				- utils.ArraysUtils.java
 	Задание 2.2 (перебор)			- arrays.ThroughArray.java
-	Задание 2.3* (интерфейс)			- 
+	Задание 2.3* (интерфейс)		- arrays.IArraysOperation.java
+						- arrays.DoWhileOperation.java
+						- arrays.WhileOperation.java
+						- arrays.ForOperation.java
+						- arrays.ForEachWhileOperation.java
 	Задание 2.4 (операции с массивов)	- arrays.TaskCodeArray.java
 
 
