@@ -1,19 +1,24 @@
-1. Задание 1 (циклы)			- loops package
-1.1. Задание 1.1. (факториал)		- Loop1Factorial1.java
-					- Loop1Factorial2.java (рекурсия)
-1.2. Задание 1.2 (перемножение)		- Loop2.java
-1.3. Задание 1.3 (степень)			- Loop3Power.java
-					- Loop3Power2.java (другой вариант решения)
+Задание 1 (циклы)
+	Задание 1.1
+		1.1.1 (факториал)		- loops.Loop1Factorial1.java
+		
+	Задание 1.2 (перемножение)		- loops.Loop2.java
+	Задание 1.3 (степень)			- loops.Loop3Power.java
+						- loops.Loop3Power2.java (другой вариант решения)
 
-1.5 Задание 1.5 (таблица умножения)		-
-
-
-2. Задание 2 (массивы)
+	Задание 1.5 (таблица умножения)		- loops.MultTable.java
 
 
+Задание 2 (массивы)
+	Задание 2.1				- utils.ArraysUtils.java
+	Задание 2.2 (перебор)			- arrays.ThroughArray.java
+	
+	Задание 2.4 (операции с массивов)	- TaskCodeArray.java
 
-3. Задание 3 (блок-схема)
 
 
+Задание 3 (блок-схема)				- sorts.BubbleSort.drawio
+						- sorts.BubbleSort.svg
 
-4. Задание 4 (сортировка)
+
+Задание 4 (сортировка)				- sorts.SortsUtils.java

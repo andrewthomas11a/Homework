@@ -7,18 +7,14 @@ import java.util.Scanner;
 
 public class Loop3Power2 {
     public static void main(String[] args) {
-        Locale.setDefault(Locale.ENGLISH);
-        /* была проблема с разделителем double
-        Scanner.hasNextDouble искал число с разделителем-запятой, а Double.parseDouble искал с разделителем-точкой
-        "вылетала" ошибка NumberFormatException
-        */
 
         System.out.println("Введите возводимое число и степень:");
         Scanner input = new Scanner(System.in);
         String v = input.nextLine();
         String s = input.nextLine();
         if (checkDouble(v) && checkInteger(s)) {
-            System.out.println(power(Double.parseDouble(v), Integer.parseInt(s)));
+            System.out.print(v + " ^ " + s + " = ");
+            System.out.println((power(Double.parseDouble(v.replace(',','.')), Integer.parseInt(s))));
         } else {
             System.out.println("Ошибка данных! Возводимое число должно быть типа double, а степень - положительным int.");
         }
