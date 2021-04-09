@@ -30,7 +30,7 @@ public class WhileOperation implements IArraysOperation{
     }
 
     @Override
-    public void arrayToConssoleReverse(int[] array) {
+    public void arrayToConsoleReverse(int[] array) {
         int count2 = array.length-1;
         while (count2 >= 0){
             System.out.print(array[count2]+"; ");

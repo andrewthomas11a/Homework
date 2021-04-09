@@ -11,8 +11,7 @@ public class ThroughArray {
             arrayToConsoleReverse(array);
         }else{
             System.out.println("Невозможно выполнить методы, т.к. создан пустой массив");
-    }
-
+        }
     }
 
     public static void arrayToConsole(int[] array){

@@ -26,7 +26,7 @@ public class ForEachOperation implements IArraysOperation{
     }
 
     @Override
-    public void arrayToConssoleReverse(int[] array) {
+    public void arrayToConsoleReverse(int[] array) {
         int[] array1 = new int[array.length];
         int element = array.length-1;
         for (int i : array){

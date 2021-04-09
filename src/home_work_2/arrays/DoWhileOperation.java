@@ -30,7 +30,7 @@ public class DoWhileOperation implements IArraysOperation{
     }
 
     @Override
-    public void arrayToConssoleReverse(int[] array) {
+    public void arrayToConsoleReverse(int[] array) {
         int count1 = array.length-1;
         do{
             System.out.print(array[count1]+"; ");

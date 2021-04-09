@@ -4,10 +4,12 @@ import home_work_2.utils.ArraysUtils;
 import java.util.Arrays;
 
 public class SortsUtils {
-    public static void main(String[] args) {
 
-    }
-
+    /**
+     * Пузырьковая сортировка: за каждый "проход" по массиву "выталкивает" наибольшее число на правую крайнюю позицию,
+     * каждый раз уменьшая диапазон "прохода" на 1.
+     * @param arr принимаемый для сортировки массив.
+     */
     public static void bubbleSort(int[] arr){
         for (int i = 1; i < arr.length; i++){
             for (int j = 0; j < arr.length-i; j++){
@@ -20,6 +22,12 @@ public class SortsUtils {
         }
     }
 
+    /**
+     * Шейкерная сортировка: каждая итерация цикла делает "проход" по массиву в обе стороны, "выталкивая"
+     * наибольшее число на правую крайнюю позицию, а наименьшее - на левую, каждый раз уменьшая диапазон "прохода"
+     * с каждой стороны.
+     * @param arr принимаемый для сортировки массив
+     */
     public static void shakerSort(int[] arr){
         int leftBorder = 0;
         int rightBorder = arr.length-1;

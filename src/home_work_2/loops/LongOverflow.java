@@ -8,9 +8,9 @@ public class LongOverflow {
         long a = 1;
         Scanner inputNubmer = new Scanner(System.in);
 
-        multiply(a, 3);
-        multiply(a, 188);
-        multiply(a, -19);
+        multiplyToLimit(a, 3);
+        multiplyToLimit(a, 188);
+        multiplyToLimit(a, -19);
 
         long b = 0;
         int scanStop = 0;
@@ -25,21 +25,19 @@ public class LongOverflow {
             }
         }
 
-        multiply(a, b);
+        multiplyToLimit(a, b);
     }
 
-    public static boolean isOverflow (long a, long b){
+    public static boolean multiplyIsOverflow (long a, long b){
         BigInteger bigA = BigInteger.valueOf(a);
         BigInteger bigB = BigInteger.valueOf(b);
-        long limitPos = Long.MAX_VALUE;
-        long limitNeg = Long.MIN_VALUE;
-        int comparePos = bigA.multiply(bigB).compareTo(BigInteger.valueOf(limitPos));
-        int compareNeg = bigA.multiply(bigB).compareTo(BigInteger.valueOf(limitNeg));
+        int comparePos = bigA.multiply(bigB).compareTo(BigInteger.valueOf(Long.MAX_VALUE));
+        int compareNeg = bigA.multiply(bigB).compareTo(BigInteger.valueOf(Long.MIN_VALUE));
         return (comparePos > 0 || compareNeg < 0);
     }
 
-    public static void multiply(long a, long b){
-        while(!isOverflow(a,b)){
+    public static void multiplyToLimit(long a, long b){
+        while(!multiplyIsOverflow(a,b)){
             a *= b;
         }
         System.out.println("Результат умножения 1 на " + b + " до переполнения: " + a);

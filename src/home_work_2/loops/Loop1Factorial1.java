@@ -1,6 +1,6 @@
 package home_work_2.loops;
 
-import java.util.Scanner; // для проверки можно ли перевести первый строковый аргумент в число
+import java.util.Scanner;
 
 public class Loop1Factorial1 {
     public static void main(String[] args) {
@@ -14,30 +14,29 @@ public class Loop1Factorial1 {
         }
     }
 
-    // Есть нюанс с переполнением, можно добавить проверки и сообщения пользователю.
-
     public static void factorial(String arg1){
         long result = 1;
         Scanner check = new Scanner(arg1);
         if (check.hasNextLong()){
             long c = Long.parseLong(arg1);
             if (c>0){
+                boolean overflow = false;
                 for (long i = 1; i<=c; i++) {
                     if (i != c) {
+                        overflow = LongOverflow.multiplyIsOverflow(result, c);
                         result *= i;
                         System.out.print(i + " * ");
                     } else {
+                        if (LongOverflow.multiplyIsOverflow(result, c)){
+                            overflow=true;
+                        }
                         result *= i;
-                        System.out.print(i + " = " + result);
+                        System.out.println(i + " = " + result);
                     }
                 }
-                // эта проверка не работает!
-                //if (result > Long.MAX_VALUE || result < Long.MIN_VALUE){
-                //    System.out.println();
-                //    System.out.println("Произошло переполнение данных - результат не точен.");
-                //}
+                System.out.println(overflow? "Внимание! Результат не точный, т.к. произошло переполнение long." : "");
             }else{
-                System.out.println("Введенное целое число не положительное. Попробуйте заново.");
+                System.out.println("Аргумент не является положительным числом. Попробуйте заново.");
             }
         }else{
             System.out.println("Аргумент не является целым числом. Попробуйте заново.");
