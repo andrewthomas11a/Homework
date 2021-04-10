@@ -13,10 +13,8 @@ public class SortsUtils {
     public static void bubbleSort(int[] arr){
         for (int i = 1; i < arr.length; i++){
             for (int j = 0; j < arr.length-i; j++){
-                if (arr[j]>arr[j+1]){
-                    int a=arr[j];
-                    arr[j]=arr[j+1];
-                    arr[j+1]=a;
+                if (arr[j] > arr[j+1]){
+                    toSwapWithNext(arr, j);
                 }
             }
         }
@@ -33,21 +31,28 @@ public class SortsUtils {
         int rightBorder = arr.length-1;
         while(leftBorder < rightBorder){
             for (int i = leftBorder; i < rightBorder; i++){
-                if (arr[i]>arr[i+1]){
-                    int a=arr[i];
-                    arr[i]=arr[i+1];
-                    arr[i+1]=a;
+                if (arr[i] > arr[i+1]){
+                    toSwapWithNext(arr, i);
                 }
             }
             rightBorder--;
             for (int j = rightBorder; j > leftBorder; j--){
                 if (arr[j] < arr[j-1]){
-                    int a=arr[j];
-                    arr[j]=arr[j-1];
-                    arr[j-1]=a;
+                    toSwapWithNext(arr, j-1);
                 }
             }
             leftBorder++;
         }
+    }
+
+    /**
+     * Принимает на вход массив, меняет в нем элемент с заданным индексом со следующим за ним элементом.
+     * @param a передаваемый массив
+     * @param i индекс элемента
+     */
+    public static void toSwapWithNext(int[] a, int i){
+            int temp = a[i];
+            a[i] = a[i+1];
+            a[i+1] = temp;
     }
 }

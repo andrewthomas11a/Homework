@@ -32,6 +32,7 @@ public class Loop1Factorial2 {
                 }
                 System.out.print(c + " = ");
                 System.out.println(fact(c));
+                // тут не придумал в итоге как сделать более красивую проверку, не вышло "вставить" ее в рекурсию :(
                 if (c>20){
                     System.out.println("Внимание! Результат не точный, т.к. произошло переполнение long.");
                 }

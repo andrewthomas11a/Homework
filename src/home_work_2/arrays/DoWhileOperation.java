@@ -1,9 +1,6 @@
 package home_work_2.arrays;
 
 public class DoWhileOperation implements IArraysOperation{
-    public static void main(String[] args) {
-
-    }
 
     @Override
     public void arrayToConsole(int[] array) {

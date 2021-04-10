@@ -5,13 +5,6 @@ import java.util.Scanner;
 import java.util.Random;
 
 public class ArraysUtils {
-    public static void main(String[] args) {
-        int[] container = arrayFromConsole();
-        System.out.println("Вы сформировали следующий массив: " + Arrays.toString(container));
-
-        int[] container2 = arrayRandom(5, 300);
-        System.out.println("Получился следующий рандомный массив: " + Arrays.toString(container2));
-    }
 
     /**
      * Метод создает массив на основе данных, введенных пользователем: размера массива и его элементов.

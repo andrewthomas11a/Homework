@@ -14,6 +14,7 @@ public class TaskCodeArray {
             System.out.println("Укажите, до какого числа генерировать рандомные числа:");
             if (input.hasNextInt()) {
                 int maxValExl = input.nextInt();
+
                 int[] array = ArraysUtils.arrayRandom(arrSize, maxValExl);
                 System.out.println("Получился массив: " + Arrays.toString(array));
                 System.out.println("Сумма положительных четных чисел массива: " + sumEvenPos(array));
@@ -21,11 +22,8 @@ public class TaskCodeArray {
                 lessThanAv(array);
                 twoMin(array);
                 intervalErase(array, 50, 100);
-                /*
-                попробовал перегрузку метода: создал метод, в который принимается только массив, а начало и конец
-                интервала задается пользователем через консоль
-                */
-                intervalErase(array);
+                // другой метод, использующий intervalErase, но запрашивающий диапазон удаления у пользователя
+                eraseIntervalUserInput(array);
                 System.out.println("Сумма цифр всех элементов массива: " + digitSum(array));
             }else{
                 System.out.println("Невозможно создать массив - введены неверные данные.");
@@ -123,15 +121,14 @@ public class TaskCodeArray {
     }
 
     /**
-     * Метод удаляет из массива числа, входящие в заданный диапазон.
-     * Печатает результат в виде визаулизации массива оставшихся чисел.
+     * Метод удаляет из массива числа, входящие в заданный диапазон, и печатает результат
+     * виде визаулизации массива оставшихся чисел. Исходный массив при этом не изменяется.
      * @param array принимаемый массив
      * @param rangeOpen начало интервала (включительно)
      * @param rangeClose конец интервала (включительно)
      */
     public static void intervalErase(int[] array, int rangeOpen, int rangeClose){
         int i = 0;
-        // клонируем массив, чтобы не изменять этим методом исходный масссив;
         int[] arrayTest = Arrays.copyOf(array, array.length);
         int m = arrayTest.length;
         System.out.print("Массив после удаления элементов в диапазоне от "+ rangeOpen + " до " + rangeClose + ": [");
@@ -154,13 +151,14 @@ public class TaskCodeArray {
     }
 
     /**
-     * Метод запрашивает у пользователя начало и конец интервала,
-     * затем удаляет из массива элементы, принадлежащие интервалу.
-     * Печатает результат в виде визаулизации массива оставшихся чисел.
-     * Если введенные данные не являются числом типа int, то печатает сообщение о невозможности исполнения метода.
+     * Метод запрашивает у пользователя начало и конец интервала, затем удаляет из массива элементы,
+     * принадлежащие интервалу [включительно], с помощью метода intervalErase, и печатает результат в виде визаулизации
+     * массива оставшихся чисел. Передаваемый в метод массив при этом не изменяется.
+     * Если введенные данные не являются числом типа int, то печатает сообщение об ошибке.
+     * Выводит соответствующее сообщение, если введенная пользователем нижняя граница интервала больше, чем верхняя.
      * @param array принимаемый массив
      */
-    public static void intervalErase(int[] array){
+    public static void eraseIntervalUserInput(int[] array){
         Scanner range = new Scanner(System.in);
         int count = 0;
         while (count < 2){
@@ -172,27 +170,7 @@ public class TaskCodeArray {
                     System.out.println("Введите конец интервала (число типа int):");
                     if (range.hasNextInt()){
                         int rangeClose = range.nextInt();
-                        int i = 0;
-                        // клонируем массив, чтобы не изменять этим методом исходный масссив;
-                        int[] arrayTest = Arrays.copyOf(array, array.length);
-                        int m = arrayTest.length;
-                        System.out.print("Массив после удаления элементов в диапазоне от "+ rangeOpen + " до " + rangeClose + ": [");
-                        while(i<m){
-                            if(arrayTest[i]>=rangeOpen && arrayTest[i]<=rangeClose){
-                                m--;
-                                for (int j = i; j < m; j++){
-                                    arrayTest[j]=arrayTest[j+1];
-                                }
-                            }else{
-                                System.out.print(arrayTest[i]+ ", ");
-                                i++;
-                            }
-                        }
-                        if (m>0){
-                            System.out.println("\b\b" + "]");
-                        }else{
-                            System.out.println("]");
-                        }
+                        intervalErase(array, rangeOpen, rangeClose);
                         count++;
                         if(rangeOpen>rangeClose){
                             System.out.println("P.S. С массивом ничего не произошло, т.к. нижняя граница интервала должна быть меньше верхней.");
@@ -207,7 +185,6 @@ public class TaskCodeArray {
                 range.next();
             }
         }
-
     }
 
     /**

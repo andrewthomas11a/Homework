@@ -48,27 +48,19 @@ public class ThroughArray {
                 count1+=2;
             }while(count1<array.length);
             System.out.println("\b\b");
-        }else{
-            System.out.println("");
-        }
 
-        if(array.length>1){
             int count2 = 1;
             while (count2 < array.length){
                 System.out.print(array[count2]+"; ");
                 count2+=2;
             }
             System.out.println("\b\b");
-        }else{
-            System.out.println("");
-        }
 
-        if(array.length>1){
             for (int i = 1; i < array.length; i+=2) {
                 System.out.print(array[i]+"; ");
             }
             System.out.println("\b\b");
-        }else{
+        }else {
             System.out.println("");
         }
 
