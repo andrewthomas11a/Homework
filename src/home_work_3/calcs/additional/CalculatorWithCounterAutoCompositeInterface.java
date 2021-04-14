@@ -1,54 +1,52 @@
 package home_work_3.calcs.additional;
 
-import home_work_3.calcs.simple.CalculatorWithMathExtends;
+import home_work_3.calcs.api.ICalculator;
 
-public class CalculatorWithCounterAutoSuper extends CalculatorWithMathExtends {
-
+public class CalculatorWithCounterAutoCompositeInterface {
+    private final ICalculator calc;
     private long count;
 
     public long getCountOperation(){
-        return count;
+        return this.count;
     }
 
-    @Override
+    public CalculatorWithCounterAutoCompositeInterface(ICalculator calc){
+        this.calc = calc;
+    }
+
     public double sum(double ... a){
         this.count++;
-        return super.sum(a);
+        return calc.sum(a);
     }
 
-    @Override
     public double minus(double a, double b){
         this.count++;
-        return super.minus(a, b);
+        return calc.minus(a,b);
     }
 
-    @Override
+
     public double mult(double ...a){
         this.count++;
-        return super.mult(a);
+        return calc.mult(a);
     }
 
-    @Override
     public double div(double a, double b){
         this.count++;
-        return super.div(a, b);
+        return calc.div(a,b);
     }
 
-    @Override
     public double power(double a, int b){
         this.count++;
-        return super.power(a, b);
+        return calc.power(a,b);
     }
 
-    @Override
     public double abs(double a){
         this.count++;
-        return super.abs(a);
+        return calc.abs(a);
     }
 
-    @Override
     public double sqrt(double a){
         this.count++;
-        return super.abs(a);
+        return sqrt(a);
     }
 }

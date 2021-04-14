@@ -1,6 +1,8 @@
 package home_work_3.calcs.simple;
 
-public class CalculatorWithMathExtends extends CalculatorWithOperator{
+import home_work_3.calcs.api.ICalculator;
+
+public class CalculatorWithMathExtends extends CalculatorWithOperator implements ICalculator {
     @Override
     public double power(double a, int b){
         return Math.pow(a, b);

@@ -6,11 +6,10 @@ public class CalculatorWithCounterClassic extends CalculatorWithMathExtends {
     private long count;
 
     public void incrementCountOperation(){
-        count++;
+        this.count++;
     }
 
     public long getCountOperation(){
-        return count;
+        return this.count;
     }
-
 }

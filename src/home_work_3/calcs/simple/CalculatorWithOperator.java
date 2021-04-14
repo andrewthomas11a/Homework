@@ -1,6 +1,8 @@
 package home_work_3.calcs.simple;
 
-public class CalculatorWithOperator {
+import home_work_3.calcs.api.ICalculator;
+
+public class CalculatorWithOperator implements ICalculator {
 
     /**
      * Метод суммирует любое количество чисел типа double, возвращает результат.
@@ -37,8 +39,8 @@ public class CalculatorWithOperator {
     }
 
     public double power(double a, int b){
-        double result = a;
-        for (int i = 1; i < b; i++) {
+        double result = 1;
+        for (int i = 0; i < b; i++) {
             result *= a;
         }
         return result;
