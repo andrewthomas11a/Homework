@@ -1,12 +1,12 @@
 package home_work_2.loops;
 
+import utils_temp.InputCheck;
 import java.math.BigInteger;
-import java.util.Scanner;
 
 public class LongOverflow {
     public static void main(String[] args) {
+        InputCheck input = new InputCheck();
         long a = 1;
-        Scanner inputNumber = new Scanner(System.in);
 
         // Здесь тестируем метод с числами из условия задачи.
         multiplyToLimit(a, 3);
@@ -14,21 +14,10 @@ public class LongOverflow {
         multiplyToLimit(a, -19);
 
         // Здесь просим пользователя самому ввести число, на котрое нужно умножать 1 до переполнения long.
-        long b = 0;
-        int scanStop = 0;
-        while (scanStop<1){
-            System.out.println("Введите целое число, на которое умножать 1.");
-            if (inputNumber.hasNextLong()){
-                b = inputNumber.nextLong();
-                scanStop++;
-            }else{
-                System.out.println("Введено не целое число, либо не число, попробуйте еще раз.");
-                inputNumber.next();
-            }
-        }
-
+        System.out.println("Введите целое число, на которое умножать 1.");
+        long b = input.checkLongInput();
+        input.close();
         multiplyToLimit(a, b);
-        inputNumber.close();
     }
 
     /**

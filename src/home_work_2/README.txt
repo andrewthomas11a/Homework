@@ -7,6 +7,7 @@
 						- loops.Loop3Power2.java (другой вариант решения)
 	Задание 1.4* (переполнение)		- loops.LongOverflow.java
 	Задание 1.5 (таблица умножения)		- loops.MultTable.java
+	                                    - loops.MultTable2.java (после просмотра видео)
 
 
 Задание 2 (массивы)
