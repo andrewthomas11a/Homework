@@ -47,6 +47,6 @@ public class CalculatorWithCounterAutoCompositeInterface {
 
     public double sqrt(double a){
         this.count++;
-        return sqrt(a);
+        return calc.sqrt(a);
     }
 }
