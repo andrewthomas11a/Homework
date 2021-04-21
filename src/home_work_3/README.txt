@@ -25,3 +25,7 @@
 
 Задание 10*:		- calcs.additional.CalculatorWithMemory.java
 			- runners.CalculatorWithMemoryMain.java
+
+Задание 11*:		- calcs.additional.CalculatorWithCounterAutoDecorator.java
+			- calcs.additional.CalculatorWithMemoryDecorator.java
+			- runners.CalculatorDecoratorMain.java

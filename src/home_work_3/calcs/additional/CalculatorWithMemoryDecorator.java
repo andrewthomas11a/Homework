@@ -2,14 +2,26 @@ package home_work_3.calcs.additional;
 
 import home_work_3.calcs.api.ICalculator;
 
-public class CalculatorWithMemory{
-    private final ICalculator calc;
-
+public class CalculatorWithMemoryDecorator implements ICalculator {
     // Переменная, в которую сохраняется результат последнего метода при вызове пользователем метода toMemory. К ней можно
     // обратиться через методы toMemory и getMemory
     private double memory;
     // Переменная для хранения результата каждого последнего вызыванного метода. К ней нет доступа извне этого класса.
     private double resultAfterEveryMethod;
+
+    private final ICalculator calc;
+
+    public CalculatorWithMemoryDecorator(ICalculator calc){
+        this.calc = calc;
+    }
+
+    /**
+     * Метод возвращает калькулятор, вложенный при использовании конструктора при создании объекта класса
+     * @return вложенный калькулятор
+     */
+    public ICalculator getCalculator(){
+        return this.calc;
+    }
 
     /**
      * Метод по вызову пользователя сохраняет в отдельную переменную результат последней операции.
@@ -26,11 +38,6 @@ public class CalculatorWithMemory{
         double memoryNew = this.memory;
         this.memory = 0;
         return memoryNew;
-    }
-
-    // конструктор для создания объекта класса
-    public CalculatorWithMemory(ICalculator calc){
-        this.calc = calc;
     }
 
     public double sum(double ... a){

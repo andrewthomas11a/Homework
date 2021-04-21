@@ -1,15 +1,13 @@
 package home_work_3.calcs.additional;
 
-import home_work_3.calcs.simple.CalculatorWithMathCopy;
-import home_work_3.calcs.simple.CalculatorWithMathExtends;
-import home_work_3.calcs.simple.CalculatorWithOperator;
+import home_work_3.calcs.simple.*;
 
 public class CalculatorWithCounterAutoComposite {
     private CalculatorWithOperator calc1;
     private CalculatorWithMathCopy calc2;
     private CalculatorWithMathExtends calc3;
 
-    // вместо такой переменной можно проверку с использованием instanceOf
+    // вместо такой переменной можно сделать проверку с использованием instanceOf либо !=null
     private final int type;
 
     private long count;
@@ -18,17 +16,17 @@ public class CalculatorWithCounterAutoComposite {
     }
 
     public CalculatorWithCounterAutoComposite(CalculatorWithOperator calc){
-        type = 1;
+        this.type = 1;
         this.calc1 = calc;
     }
 
     public CalculatorWithCounterAutoComposite(CalculatorWithMathCopy calc){
-        type = 2;
+        this.type = 2;
         this.calc2 = calc;
     }
 
     public CalculatorWithCounterAutoComposite(CalculatorWithMathExtends calc){
-        type = 3;
+        this.type = 3;
         this.calc3 = calc;
     }
 
