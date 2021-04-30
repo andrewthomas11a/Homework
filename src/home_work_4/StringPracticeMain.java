@@ -4,6 +4,12 @@ public class StringPracticeMain {
     public static void main(String[] args) {
         StringPractice str = new StringPractice();
 
+        // Проверяем результат из задачи № 1
+        System.out.println(str.toString(-15_352_293));
+
+        // Проверяем результат из задачи № 2
+        System.out.println(str.toString(223.15));
+
         // Проверяем результат из задачи № 3
         System.out.println(str.toWeek(8));
         System.out.println(str.toWeek(21));
