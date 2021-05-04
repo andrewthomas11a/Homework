@@ -7,17 +7,21 @@ public class Name1 {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         String name = input.nextLine();
+        final String name1 = "Вася";
+        final String name2 = "Анастасия";
+        boolean isName1 = Objects.equals(name, name1);
+        boolean isName2 = Objects.equals(name, name2);
 
-        if (Objects.equals(name, "Вася")){
+        if(isName1){
             System.out.println("Привет!");
             System.out.println("Я тебя так долго ждал");
         }
 
-        if (Objects.equals(name, "Анастасия")){
+        if(isName2){
             System.out.println("Я тебя так долго ждал");
         }
 
-        if (!Objects.equals(name, "Анастасия")&&!Objects.equals(name, "Вася")){
+        if(!isName1 && !isName2){
             System.out.println("Добрый день, а вы кто?");
         }
 

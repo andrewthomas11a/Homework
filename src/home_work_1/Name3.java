@@ -7,13 +7,13 @@ public class Name3 {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         String name = input.nextLine();
+        final String name1 = "Вася";
+        final String name2 = "Анастасия";
 
         switch (name){
-            case "Вася":
+            case name1:
                 System.out.println("Привет!");
-                System.out.println("Я тебя так долго ждал");
-                break;
-            case "Анастасия":
+            case name2:
                 System.out.println("Я тебя так долго ждал");
                 break;
             default:

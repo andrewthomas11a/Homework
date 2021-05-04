@@ -1,8 +1,5 @@
 package home_work_2.utils;
 
-import home_work_2.utils.ArraysUtils;
-import java.util.Arrays;
-
 public class SortsUtils {
 
     /**

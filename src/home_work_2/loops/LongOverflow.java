@@ -5,7 +5,7 @@ import java.math.BigInteger;
 
 public class LongOverflow {
     public static void main(String[] args) {
-        InputCheck input = new InputCheck();
+        InputCheck input = new InputCheck("Введено не целое число, либо не число, попробуйте еще раз.");
         long a = 1;
 
         // Здесь тестируем метод с числами из условия задачи.

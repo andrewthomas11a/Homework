@@ -18,6 +18,19 @@ UPD: В этом классе создал общий Scanner для каждо�
 
 public class InputCheck {
     Scanner userInput = new Scanner(System.in);
+    private String errorText;
+
+    public String getError(){
+        return errorText;
+    }
+
+    public InputCheck(){
+        this.errorText = "Введено не число нужного типа, либо не число, попробуйте еще раз:";
+    }
+
+    public InputCheck (String error){
+        this.errorText = error;
+    }
     /**
      * Метод запрашивает у пользователя введение данных в консоль, проверяет на наличие в введенных данных
      * числа типа int, возвращает введенное число типа int. Если данные не содержат число типа int - выводит
@@ -31,7 +44,7 @@ public class InputCheck {
                 numberFromInput = userInput.nextInt();
                 break;
             }else{
-                System.out.println("Введено не целое число типа int, либо не число, попробуйте еще раз.");
+                System.out.println(this.errorText);
                 userInput.next();
             }
         }
@@ -51,7 +64,7 @@ public class InputCheck {
                 numberFromInput = userInput.nextLong();
                 break;
             }else{
-                System.out.println("Введено не целое число, либо не число, попробуйте еще раз.");
+                System.out.println(errorText);
                 userInput.next();
             }
         }

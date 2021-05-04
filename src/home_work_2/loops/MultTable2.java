@@ -4,7 +4,7 @@ import utils_temp.InputCheck;
 
 public class MultTable2 {
     public static void main(String[] args) {
-        InputCheck input = new InputCheck();
+        InputCheck input = new InputCheck("Введено не целое число, либо не число, попробуйте еще раз.");
         System.out.println("С какого числа начинать таблицу?");
         int startNumber = input.checkIntInput();
         System.out.println("До какого числа выводить таблицу?");
