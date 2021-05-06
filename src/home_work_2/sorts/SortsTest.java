@@ -4,7 +4,6 @@ import java.util.Arrays;
 import home_work_2.utils.ArraysUtils;
 import home_work_2.utils.SortsUtils;
 
-
 public class SortsTest {
     public static void main(String[] args) {
         int[] testArray1b = {1,2,3,4,5,6};

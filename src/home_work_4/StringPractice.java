@@ -153,6 +153,7 @@ public class StringPractice {
      * Метод возвращает положительное число от 0 до 999 в виде строки прописью на русском языке
      * @param number передаваемое число
      * @param returnZero нужно ли возвращать "ноль" в случае, если переданное число равно 0
+     * @param maleOrFem true - если род слова, следующего за числом, мужской; false - если женский
      * @return число прописью на русском языке
      */
     public String numberNameRus(int number, boolean returnZero, boolean maleOrFem){

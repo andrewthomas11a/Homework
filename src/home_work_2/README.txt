@@ -4,7 +4,6 @@
 		1.1.2.* (рекурсия)		- loops.Loop1Factorial2.java
 	Задание 1.2 (перемножение)		- loops.Loop2.java
 	Задание 1.3 (степень)			- loops.Loop3Power.java
-						- loops.Loop3Power2.java (другой вариант решения)
 	Задание 1.4* (переполнение)		- loops.LongOverflow.java
 	Задание 1.5 (таблица умножения)		- loops.MultTable.java
 	                                    - loops.MultTable2.java (после просмотра видео)

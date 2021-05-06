@@ -1,7 +1,5 @@
 package home_work_1;
 
-import java.util.Arrays;
-
 public class MathClass {
     public static void main(String[] args) {
         int a = -15;

@@ -8,7 +8,10 @@ public class SortsUtils {
      * @param arr принимаемый для сортировки массив.
      */
     public static void bubbleSort(int[] arr){
+        // количество "проходов" будет на 1 меньше количества элементов массива, так как сравниваются пары соседних элементов
         for (int i = 1; i < arr.length; i++){
+            // в каждом "проходе" сравниваем каждый элемент массива со следующим, если он больше следующего за ним -
+            // меняем их местами.
             for (int j = 0; j < arr.length-i; j++){
                 if (arr[j] > arr[j+1]){
                     toSwapWithNext(arr, j);
@@ -27,17 +30,22 @@ public class SortsUtils {
         int leftBorder = 0;
         int rightBorder = arr.length-1;
         while(leftBorder < rightBorder){
+            // "проход" вперед
             for (int i = leftBorder; i < rightBorder; i++){
                 if (arr[i] > arr[i+1]){
                     toSwapWithNext(arr, i);
                 }
             }
+            // правый крайний элемент массива стал наибольшим, его можно исключить из "прохода"
             rightBorder--;
+
+            // "проход" в обратную сторону
             for (int j = rightBorder; j > leftBorder; j--){
                 if (arr[j] < arr[j-1]){
                     toSwapWithNext(arr, j-1);
                 }
             }
+            // левый краний элемент массива стал наименьшим, его можно исключить из "прохода"
             leftBorder++;
         }
     }
@@ -48,8 +56,9 @@ public class SortsUtils {
      * @param i индекс элемента
      */
     public static void toSwapWithNext(int[] a, int i){
-            int temp = a[i];
-            a[i] = a[i+1];
-            a[i+1] = temp;
+        // метод "трех стаканов"
+        int temp = a[i];
+        a[i] = a[i+1];
+        a[i+1] = temp;
     }
 }

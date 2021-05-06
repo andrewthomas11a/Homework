@@ -4,33 +4,32 @@ import java.util.Scanner;
 
 public class Loop3Power {
     public static void main(String[] args) {
+
         System.out.println("Введите возводимое число и степень:");
-        Scanner input1 = new Scanner(System.in);
-        if (input1.hasNextDouble()) {
-            String local = input1.nextLine();
-            double v = Double.parseDouble(local.replace(',','.'));
-            Scanner input2 = new Scanner(System.in);
-            if (input2.hasNextInt()) {
-                int s = input2.nextInt();
-                if (s>0) {
-                    System.out.println(v + " ^ " + s + " = " + power(v, s));
-                }else{
-                    System.out.println("Степень должна быть положительной!");
-                }
-            }
-            else{
-                System.out.println("Ошибка данных! Степень должна быть типа int!");
-            }
-            input2.close();
+        Scanner input = new Scanner(System.in);
+        String v = input.nextLine();
+        String s = input.nextLine();
+        if (checkDouble(v) && checkInteger(s)) {
+            System.out.print(v + " ^ " + s + " = ");
+            System.out.println((power(Double.parseDouble(v.replace(',','.')), Integer.parseInt(s))));
         } else {
-            System.out.println("Ошибка данных! Возводимое число должно быть типа double!");
+            System.out.println("Ошибка данных! Возводимое число должно быть типа double, а степень - положительным int.");
         }
-        input1.close();
+    }
+
+    public static boolean checkDouble(String v){
+        Scanner check = new Scanner(v);
+        return check.hasNextDouble();
+    }
+
+    public static boolean checkInteger(String s){
+        Scanner check = new Scanner(s);
+        return (check.hasNextInt() && check.nextInt()>=0);
     }
 
     public static double power (double v, int s){
-        double result = v;
-        for (int i = 1; i < s; i++) {
+        double result = 1;
+        for (int i = 0; i < s; i++) {
             result *= v;
         }
         return result;
