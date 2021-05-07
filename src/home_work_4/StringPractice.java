@@ -8,6 +8,10 @@ public class StringPractice {
             return "";
         }
 
+        if (number == 0){
+            return "Ноль";
+        }
+
         StringBuilder str = new StringBuilder();
 
         if (number < 0) {
@@ -25,15 +29,15 @@ public class StringPractice {
         };
 
         if (millions != 0){
-            str.append(numberNameRus(millions, false, true)).append(" ").
+            str.append(numberNameRus(millions, true)).append(" ").
                     append(numberPartType[0][caseRussian(millions)]).append(" ");
         }
         if (thousand != 0){
-            str.append(numberNameRus(thousand, false, false)).append(" ").
+            str.append(numberNameRus(thousand, false)).append(" ").
                     append(numberPartType[1][caseRussian(thousand)]).append(" ");
         }
 
-        str.append(numberNameRus(hundred, true, true));
+        str.append(numberNameRus(hundred, true));
 
         str.replace(0, 1, (str.substring(0,1)).toUpperCase());
 
@@ -43,22 +47,36 @@ public class StringPractice {
     public String toString (double number){
         StringBuilder str = new StringBuilder();
 
+        // создаем массив путем разделения строкового вида числа double на две части: до точки и после
         String[] numberPartArray = Double.toString(number).split("[.]");
-
+        // первый строковый элемент массива записываем в переменную типа int
         int intPart = Integer.parseInt(numberPartArray[0]);
+        // второй элемент массива записываем в переменную типа int. учитывая необходимость "прочитать" только 2 цифры
+        // после запятой, обрезаем строку до двух символов, проверяя, не состоит ли строка уже из 1 символа
         int fractPart = Integer.parseInt(numberPartArray[1].substring(0, numberPartArray[1].length() > 1 ? 2 : 1));
-        // здесь можно сделать по-другому: вместо "сотых" добавлять "десятых", если длина дробной части 1, т.к.
+
+        // если после запятой была только 1 цифра, добавляем в конце ноль, чтобы можно было читать "сотых".
+        // можно сделать по-другому: вместо "сотых" добавлять "десятых", если длина дробной части 1, т.к.
         // возможно "10 сотых" не совсем корректно
         if (numberPartArray[1].length() == 1){
             fractPart *= 10;
         }
 
+        // добавляем словами целую часть числа double, используя метод toString, написанный для int
         str.append(toString(intPart));
-        // что со склонениями делать? одна сотая? 2, 3, 4 целые?
         str.append(" целых ");
-        str.append(numberNameRus(fractPart, true, false));
-        // что со склонениями делать? 2, 3, 4 сотые?
+        // добавляем словами дробную часть числа
+        str.append(numberNameRus(fractPart,  true));
         str.append(" сотых");
+
+        /*
+        // На случай если нужно склонять слова "целых" и "сотых"
+        String[][] partName = {{" целых ", " целая ", " целые "}, {" сотых", " сотая", " сотые"}};
+        str.append(toString(intPart));
+        str.append(partName[0][caseRussian(intPart)]);
+        str.append(numberNameRus(fractPart, false));
+        str.append(partName[1][caseRussian(fractPart)]);
+         */
 
         return str.toString();
     }
@@ -152,11 +170,10 @@ public class StringPractice {
     /**
      * Метод возвращает положительное число от 0 до 999 в виде строки прописью на русском языке
      * @param number передаваемое число
-     * @param returnZero нужно ли возвращать "ноль" в случае, если переданное число равно 0
      * @param maleOrFem true - если род слова, следующего за числом, мужской; false - если женский
      * @return число прописью на русском языке
      */
-    public String numberNameRus(int number, boolean returnZero, boolean maleOrFem){
+    public String numberNameRus(int number, boolean maleOrFem){
         if (number > 999 || number < 0){
             System.out.println("В метод передано число за пределами диапазона.");
             return "";
@@ -192,10 +209,6 @@ public class StringPractice {
                 str.append(" ");
             }
             str.append(numberNameArray[lastDigit][maleOrFem ? 3 : 4]);
-        }
-
-        if (returnZero && number == 0){
-            str.append("ноль");
         }
 
         return str.toString();
