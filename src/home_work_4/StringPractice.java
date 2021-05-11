@@ -133,11 +133,11 @@ public class StringPractice {
                     {" секунд", " секунда", " секунды"}, {" миллисекунд", " миллисекунда", " миллисекунды"}};
 
             str.append(timePart[3][caseRussian(millisec)]);
-            if (millisecond>=1000){
+            if (Math.abs(millisecond)>=1000){
                 str.insert(0, " ").insert(0, (timePart[2][caseRussian(sec)])).insert(0, sec);
-                if (millisecond>=60000){
+                if (Math.abs(millisecond)>=60000){
                     str.insert(0, " ").insert(0, (timePart[1][caseRussian(min)])).insert(0, min);
-                    if (millisecond>=3600000){
+                    if (Math.abs(millisecond)>=3600000){
                         str.insert(0, " ").insert(0, (timePart[0][caseRussian(hours)])).insert(0, hours);
                     }
                 }
