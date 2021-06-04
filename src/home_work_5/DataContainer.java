@@ -2,9 +2,10 @@ package home_work_5;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.Objects;
 
-public class DataContainer <T> {
+public class DataContainer <T> implements Iterable{
     private T[] data;
 
     DataContainer(T[] data) {
@@ -14,7 +15,6 @@ public class DataContainer <T> {
     /**
      * Метод добавляет в контейнер переданный элемент на ближайшую с начала пустую ячейку. Если контейнер пустой или
      * переполнен - увеличивает его размер на 1 и добавляет элемент в свободную ячейку. В контейнер запрещено добавлять null
-     *
      * @param item передаваемый элемент, который необходимо добавить.
      * @return номер ячейки в контейнере (начиная с 0), в которую был помещен переданный элемент. Возвратит -1, если
      * данный элемент в контейнер поместить нельзя.
@@ -47,7 +47,6 @@ public class DataContainer <T> {
 
     /**
      * Метод возвращает элемент из контейнера под переданным порядковым номером (начиная с 0).
-     *
      * @param index порядковый номер (номер ячейки) нужного элемента (начиная с 0).
      * @return искомый элемент.
      */
@@ -63,7 +62,6 @@ public class DataContainer <T> {
 
     /**
      * Возвращает приватное поле data этого класса.
-     *
      * @return приватное поле data этого класса.
      */
     public T[] getItems() {
@@ -96,7 +94,6 @@ public class DataContainer <T> {
     /**
      * Метод удаляет из контейнера передаваемый элемент. Ячейка, из которой удален элемент, не остается пустой,
      * а удаляется полностью.
-     *
      * @param item искомый элемент.
      * @return false - если удаление элемента произвести невозможно; true - если удаление завершено успешно.
      */
@@ -151,8 +148,34 @@ public class DataContainer <T> {
         return str.toString();
     }
 
-//    11.* В даном классе должен быть СТАТИЧЕСКИЙ метод void sort(DataContainer<.............> container)
-//    который будет принимать объект DataContainer с дженериком extends Comparable.
-//    Данный метод будет сортировать элементы в ПЕРЕДАННОМ объекте DataContainer
-//    используя реализацию сравнения вызываемый у хранимых объектов.
+    public static <Z extends Comparable> void sort(DataContainer<Z> container){
+            for (int i = 1; i < container.data.length; i++) {
+                for (int j = 0; j < container.data.length - i; j++) {
+                    if (container.data[j].compareTo(container.data[j + 1]) > 0) {
+                        Z temp = container.data[j];
+                        container.data[j] = container.data[j + 1];
+                        container.data[j + 1] = temp;
+                    }
+                }
+            }
+    }
+
+    public static <Z> void sort(DataContainer<Z> container, Comparator<? super Z> comparator){
+        if (comparator != null){
+            for (int i = 1; i < container.data.length; i++) {
+                for (int j = 0; j < container.data.length - i; j++) {
+                    if (comparator.compare(container.data[j], container.data[j + 1]) > 0) {
+                        Z temp = container.data[j];
+                        container.data[j] = container.data[j + 1];
+                        container.data[j + 1] = temp;
+                    }
+                }
+            }
+        }
+    }
+
+    // тут еще не разобрался :(
+    public Iterator<T> iterator(){
+        return this.iterator();
+    }
 }
