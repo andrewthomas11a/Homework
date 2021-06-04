@@ -1,6 +1,7 @@
 package home_work_5;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Objects;
 
 public class DataContainer <T> {
@@ -112,11 +113,27 @@ public class DataContainer <T> {
         return isDeleted;
     }
 
-//     public void sort(Comparator<.......> comparator){
-//
-//     }
-//     Данный метод занимается сортировкой данных записанных в поле data используя реализацию сравнения из ПЕРЕДАННОГО
-//     объекта comparator. Классом Arrays пользоваться запрещено.
+    /**
+     * Метод производит сортировку контейнера от меньшего к большему, используя для сравнения метод переданного
+     * объекта comparator типа Comparator<T>
+     * @param comparator - объект типа Comparator<T>, метод сравнения которого используется
+     */
+    public void sort(Comparator<? super T> comparator){
+        // если правильно понимаю, в дженерик Comparator'а записываем именно эту wildcard, чтобы можно было передать
+        // реализацию сравнения не только нужного нам класса, но и его родителя
+        if (comparator != null){
+            // пузырьковая сортировка ("выталкивание" большего элемента в конец)
+            for (int i = 1; i < data.length; i++) {
+                for (int j = 0; j < data.length - i; j++) {
+                    if (comparator.compare(data[j], data[j + 1]) > 0) {
+                        T temp = data[j];
+                        data[j] = data[j + 1];
+                        data[j + 1] = temp;
+                    }
+                }
+            }
+        }
+    }
 
     @Override
     public String toString() {
@@ -133,4 +150,9 @@ public class DataContainer <T> {
         str.append("}");
         return str.toString();
     }
+
+//    11.* В даном классе должен быть СТАТИЧЕСКИЙ метод void sort(DataContainer<.............> container)
+//    который будет принимать объект DataContainer с дженериком extends Comparable.
+//    Данный метод будет сортировать элементы в ПЕРЕДАННОМ объекте DataContainer
+//    используя реализацию сравнения вызываемый у хранимых объектов.
 }
