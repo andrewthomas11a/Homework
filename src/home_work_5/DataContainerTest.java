@@ -1,6 +1,7 @@
 package home_work_5;
 
 import java.util.Arrays;
+import java.util.Iterator;
 
 public class DataContainerTest {
 
@@ -21,6 +22,21 @@ public class DataContainerTest {
         data1.sort(comparator);
         System.out.println(data1.toString());
 
+        Iterator<String> it = data1.iterator();
+        System.out.println(it.hasNext());
+        System.out.println(it.next());
+        System.out.println(it.hasNext());
+        System.out.println(it.next());
+        System.out.println(it.hasNext());
+        System.out.println(it.next());
+        System.out.println(it.hasNext());
+
+        Iterator<String> it2 = data1.iterator();
+        while(it2.hasNext()){
+            System.out.print(it2.next() + " ");
+        }
+        System.out.println();
+
         System.out.println(data1.delete(5));
         System.out.println(data1.toString());
         System.out.println(data1.delete(15));
@@ -29,5 +45,6 @@ public class DataContainerTest {
         System.out.println(data1.toString());
         System.out.println(data1.delete(null));
         System.out.println(data1.toString());
+
     }
 }

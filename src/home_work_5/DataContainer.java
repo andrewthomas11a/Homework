@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.Objects;
 import java.util.function.Consumer;
 
-public class DataContainer <T> implements Iterable{
+public class DataContainer <T> implements Iterable<T>{
     private T[] data;
 
     DataContainer(T[] data) {
