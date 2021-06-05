@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Objects;
+import java.util.function.Consumer;
 
 public class DataContainer <T> implements Iterable{
     private T[] data;
@@ -176,6 +177,24 @@ public class DataContainer <T> implements Iterable{
 
     // тут еще не разобрался :(
     public Iterator<T> iterator(){
-        return this.iterator();
+        return new DataContainerIterator();
+    }
+
+    class DataContainerIterator implements Iterator<T>{
+        private int index = 0;
+
+        @Override
+        public boolean hasNext() {
+            if (data.length == 0){
+                return false;
+            }
+            return index < data.length;
+        }
+
+        @Override
+        public T next() {
+            index++;
+            return data[index-1];
+        }
     }
 }
