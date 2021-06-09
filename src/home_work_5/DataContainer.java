@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Objects;
-import java.util.function.Consumer;
 
 public class DataContainer <T> implements Iterable<T>{
     private T[] data;
@@ -149,7 +148,7 @@ public class DataContainer <T> implements Iterable<T>{
         return str.toString();
     }
 
-    public static <Z extends Comparable> void sort(DataContainer<Z> container){
+    public static <Z extends Comparable<Z>> void sort(DataContainer<Z> container){
             for (int i = 1; i < container.data.length; i++) {
                 for (int j = 0; j < container.data.length - i; j++) {
                     if (container.data[j].compareTo(container.data[j + 1]) > 0) {
