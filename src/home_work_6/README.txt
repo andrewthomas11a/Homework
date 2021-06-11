@@ -20,5 +20,5 @@
 
 Задание 3.4:		- utils.UtilsWithTimeMeasure.java
 			(содержит сами методы итерации, удаления и замера времени)
-			- utils.CollectionsFillAndIterateAndClearTest.java
+			- test.CollectionsFillAndIterateAndClearTest.java
 			(проверка и "распечатка" результатов)
