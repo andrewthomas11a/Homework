@@ -1,11 +1,10 @@
-package home_work_6;
+package home_work_6.utils;
 
-import home_work_6.dto.Animal;
-import home_work_6.dto.Person;
+import home_work_6.dto.*;
 
 import java.util.*;
 
-public class CollectionsFill {
+public class CollectionsRandomFill {
     private static final String nickCharsRusUpper = "АБВГДЕЁЖЗИКЛМНОПРСТУФХЦЧШЩЭЮЯ";
     private static final String nickCharsRusLower = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя";
     static Random random = new Random();

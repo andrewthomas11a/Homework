@@ -1,6 +1,8 @@
 package home_work_6.dto;
 
-public class Person {
+import home_work_6.compatarors.PersonPassNickComparator;
+
+public class Person implements Comparable<Person>{
     // предполагаем, что данные в последующем не будут меняться
     private final String nick;
     private final String password;
@@ -32,5 +34,12 @@ public class Person {
 
     public String toString() {
         return "{nick: \"" + this.nick + "\", password: \"" + this.password + "\"}";
+    }
+
+    // сделал для того, чтобы при заполнении TreeSet можно было не передавать в конструктор Comparator
+    @Override
+    public int compareTo(Person other) {
+        PersonPassNickComparator c = new PersonPassNickComparator();
+        return c.compare(this, other);
     }
 }

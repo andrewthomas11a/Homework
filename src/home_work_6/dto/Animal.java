@@ -1,6 +1,8 @@
 package home_work_6.dto;
 
-public class Animal {
+import home_work_6.compatarors.AnimalAgeNickComparator;
+
+public class Animal implements Comparable<Animal>{
     // предполагаем, что данные в последующем не будут меняться
     private final int age;
     private final String nick;
@@ -30,5 +32,12 @@ public class Animal {
 
     public String toString() {
         return "{age: " + this.age + ", nick: \"" + this.nick + "\"}";
+    }
+
+    // сделал для того, чтобы при заполнении TreeSet можно было не передавать в конструктор Comparator
+    @Override
+    public int compareTo(Animal other) {
+        AnimalAgeNickComparator c = new AnimalAgeNickComparator();
+        return c.compare(this, other);
     }
 }
