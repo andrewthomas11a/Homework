@@ -1,7 +1,9 @@
 package home_work_6.test;
 
 import home_work_6.dto.*;
-import home_work_6.utils.UtilsWithTimeMeasure;
+import home_work_6.suppliers.GetAnimalRandom;
+import home_work_6.suppliers.GetPersonRandom;
+import home_work_6.utils.CollectionOperationsTimeWithSupplier;
 import org.junit.jupiter.api.*;
 import java.util.*;
 
@@ -17,27 +19,21 @@ public class CollectionsFillAndIterateAndClearTest {
     Set<Person> personTreeSet = new TreeSet<>();
 
     @Test
-    @DisplayName("Замеряем время заполнения коллекций, время итерации и очистки коллекций")
+    @DisplayName("Замер времени заполнения, итерации и очистки коллекций.")
     public void fillAndIterateAndClear() {
-        UtilsWithTimeMeasure.animalCollectionFillAndTimeMeasure(animalArrayList, quantity);
-        UtilsWithTimeMeasure.animalCollectionFillAndTimeMeasure(animalLinkedList, quantity);
-        UtilsWithTimeMeasure.animalCollectionFillAndTimeMeasure(animalHashSet, quantity);
-        UtilsWithTimeMeasure.animalCollectionFillAndTimeMeasure(animalTreeSet, quantity);
-        UtilsWithTimeMeasure.personCollectionFillAndWithTimeMeasure(personArrayList, quantity);
-        UtilsWithTimeMeasure.personCollectionFillAndWithTimeMeasure(personLinkedList, quantity);
-        UtilsWithTimeMeasure.personCollectionFillAndWithTimeMeasure(personHashSet, quantity);
-        UtilsWithTimeMeasure.personCollectionFillAndWithTimeMeasure(personTreeSet, quantity);
 
-        System.out.println();
+        System.out.println("\tЗаполняем коллекции объектами Animal и выполняем другие операции:");
+        CollectionOperationsTimeWithSupplier.fillIterationClearTimeMeasure(animalArrayList, new GetAnimalRandom(), quantity);
+        CollectionOperationsTimeWithSupplier.fillIterationClearTimeMeasure(animalLinkedList, new GetAnimalRandom(), quantity);
+        CollectionOperationsTimeWithSupplier.fillIterationClearTimeMeasure(animalHashSet, new GetAnimalRandom(), quantity);
+        CollectionOperationsTimeWithSupplier.fillIterationClearTimeMeasure(animalTreeSet, new GetAnimalRandom(), quantity);
+        System.out.println("_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _");
+        System.out.println("\tЗаполняем коллекции объектами Person и выполняем другие операции:");
+        CollectionOperationsTimeWithSupplier.fillIterationClearTimeMeasure(personArrayList, new GetPersonRandom(), quantity);
+        CollectionOperationsTimeWithSupplier.fillIterationClearTimeMeasure(personLinkedList, new GetPersonRandom(), quantity);
+        CollectionOperationsTimeWithSupplier.fillIterationClearTimeMeasure(personHashSet, new GetPersonRandom(), quantity);
+        CollectionOperationsTimeWithSupplier.fillIterationClearTimeMeasure(personTreeSet, new GetPersonRandom(), quantity);
 
-        UtilsWithTimeMeasure.collectionIterationAndClearWithTimeMeasure(animalArrayList);
-        UtilsWithTimeMeasure.collectionIterationAndClearWithTimeMeasure(animalLinkedList);
-        UtilsWithTimeMeasure.collectionIterationAndClearWithTimeMeasure(personArrayList);
-        UtilsWithTimeMeasure.collectionIterationAndClearWithTimeMeasure(personLinkedList);
-        UtilsWithTimeMeasure.collectionIterationAndClearWithTimeMeasure(animalHashSet);
-        UtilsWithTimeMeasure.collectionIterationAndClearWithTimeMeasure(personHashSet);
-        UtilsWithTimeMeasure.collectionIterationAndClearWithTimeMeasure(animalTreeSet);
-        UtilsWithTimeMeasure.collectionIterationAndClearWithTimeMeasure(personTreeSet);
         boolean result = (animalArrayList.size() == 0 && animalLinkedList.size() == 0 && personArrayList.size() == 0 &&
                 personLinkedList.size() == 0 && animalHashSet.size() == 0 && personHashSet.size() == 0 &&
                 animalTreeSet.size() == 0 && personTreeSet.size() == 0);

@@ -1,42 +1,37 @@
 package home_work_6.utils;
 
-import home_work_6.dto.*;
-import java.lang.*;
 import java.util.*;
+import java.util.function.Supplier;
 
-public class UtilsWithTimeMeasure {
+public class CollectionOperationsTimeWithSupplier {
 
-    public static void personCollectionFillAndWithTimeMeasure(Collection<Person> collection, int quantity) {
+    // это такой же класс, только вместо отдельного метода для заполнения конкретным объектом использован Supplier
+
+    public static <T> void fillIterationClearTimeMeasure(Collection<T> collection, Supplier<T> supplier, int quantity) {
         long start = System.currentTimeMillis();
-        CollectionsRandomFill.fillWithPerson(collection, quantity);
-        long finish = System.currentTimeMillis();
-        long result = finish - start;
-        System.out.println("Операция: Заполнение коллекции класса " + collection.getClass().getSimpleName() +
-                " объектами Person. Заняла " + result + " мс.");
-    }
-
-    public static void animalCollectionFillAndTimeMeasure(Collection<Animal> collection, int quantity) {
-        long start = System.currentTimeMillis();
-        CollectionsRandomFill.fillWithAnimal(collection, quantity);
-        long finish = System.currentTimeMillis();
-        long result = finish - start;
-        System.out.println("Операция: Заполнение коллекции класса " + collection.getClass().getSimpleName() +
-                " объектами Animal. Заняла " + result + " мс.");
-    }
-
-    public static <T> void collectionIterationAndClearWithTimeMeasure(Collection<T> collection) {
-        Iterator<T> it = collection.iterator();
-        long start = System.currentTimeMillis();
-        while(it.hasNext()) {
-            it.next();
+        for (int i = 0; i < quantity; i++) {
+            collection.add(supplier.get());
         }
         long finish = System.currentTimeMillis();
+        long result = finish - start;
+        System.out.println("Операция: Заполнение коллекции класса " + collection.getClass().getSimpleName() +
+                ". Заняла " + result + " мс.");
+
+        Iterator<T> it = collection.iterator();
+        start = System.currentTimeMillis();
+        while(it.hasNext()) {
+            it.next();
+            // итерация
+        }
+        finish = System.currentTimeMillis();
         System.out.println("Операция: Итерирование коллекции класса " + collection.getClass().getSimpleName() +
                 " при помощи Iterator. Заняла " + (finish - start) + " мс.");
 
         start = System.currentTimeMillis();
+        // не уверен, что это правильный способ итерирования с помощью цикла FOR
         List<T> array = new ArrayList<>(collection);
         for (int i = 0; i < array.size(); i++) {
+            array.get(i);
             // итерация
         }
         finish = System.currentTimeMillis();
@@ -44,7 +39,6 @@ public class UtilsWithTimeMeasure {
                 " при помощи цикла FOR. Заняла " + (finish - start) + " мс.");
 
         start = System.currentTimeMillis();
-
         it = collection.iterator();
         while (it.hasNext()) {
             it.next();

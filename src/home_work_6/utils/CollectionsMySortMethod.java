@@ -8,7 +8,7 @@ import java.util.Comparator;
 // подсматривал в ArrayList и другие - надо разбираться, показалось очень сложным
 
 public class CollectionsMySortMethod {
-    public static <Z> void sort(Collection<Z> collection, Comparator<? super Z> comparator) {
+    public static <Z> void sort(Collection<? super Z> collection, Comparator<? super Z> comparator) {
         if (comparator != null){
             Z[] arr = (Z[]) (collection.toArray());
             Arrays.sort(arr, comparator);
