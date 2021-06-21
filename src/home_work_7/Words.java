@@ -1,5 +1,9 @@
 package home_work_7;
 
+import home_work_7.api.ISearchEngine;
+import home_work_7.searchUtils.EasySearch;
+import home_work_7.searchUtils.RegExSearch;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -8,21 +12,31 @@ import java.util.*;
 public class Words {
     public static void main(String[] args) {
         Set<String> uniqueWords = new HashSet<>();
+        Words w = new Words();
         try {
             String text = Files.readString(Path.of("Homework\\WarAndPeace.txt"));
-            uniqueWordsToSet(uniqueWords, text);
-            topNWords(text, 50);
+            w.uniqueWordsToSet(uniqueWords, text);
+            w.topNWords(text, 10);
+            System.out.println("EasySearch");
+            w.numberOfRepeat(text, "война", new EasySearch());
+            w.numberOfRepeat(text, "и", new EasySearch());
+            w.numberOfRepeat(text, "мир", new EasySearch());
+            System.out.println("RegExSearch");
+            w.numberOfRepeat(text, "война", new RegExSearch());
+            w.numberOfRepeat(text, "и", new RegExSearch());
+            w.numberOfRepeat(text, "мир", new RegExSearch());
         } catch (IOException e) {
             System.out.println("Ошибка при чтении файла.");
         }
+
     }
 
     /**
-     * Метод возвращает массив слов, использованных в тексте
+     * Метод возвращает массив слов, использованных в тексте.
      * @param text текст, в котором производится поиск слов
      * @return массив слов без знаков препинания
      */
-    public static String[] wordsFromText (String text) {
+    public String[] wordsFromText (String text) {
         text = text.replaceAll("[\\x00-\\x2C\\x2E-\\x2F\\x3A-\\x40\\x5B-\\x60\\x7B-\\x7F]+", " ");
         text = text.replaceAll(" -", " ");
         text = text.replaceAll("- ", " ");
@@ -35,7 +49,7 @@ public class Words {
      * @param set передаваемая коллекция Set<String>, в которую будут записаны использованные в тексте слова
      * @param text текст, в котором производится поиск слов
      */
-    public static void uniqueWordsToSet (Set<String> set, String text) {
+    public void uniqueWordsToSet (Set<String> set, String text) {
         Collections.addAll(set, wordsFromText(text));
         System.out.println("В тексте было найдено " + set.size() + " уникальных слов.");
     }
@@ -46,7 +60,7 @@ public class Words {
      * @param text текст, в котором производится поиск слов
      * @param quantityOfWords необходимое для вывода количество максимально повторяющихся слов
      */
-    public static void topNWords (String text, int quantityOfWords) {
+    public void topNWords (String text, int quantityOfWords) {
         String[] words = wordsFromText(text);
         Map<String, Integer> map = new HashMap<>();
         for (int i = 0; i < words.length; i++) {
@@ -70,5 +84,10 @@ public class Words {
             System.out.println("Слово \"" + entry.getKey() + "\" - " +
                     entry.getValue() + " раз.");
         }
+    }
+
+    public void numberOfRepeat (String text, String word, ISearchEngine search) {
+        // нужно вне зависимости от регистра, а некоторые наши поисковики учитывают регистр
+        System.out.println("Слово " + word + " повторяется в текст " + search.search(text, word) + " раз(а).");
     }
 }
