@@ -1,6 +1,7 @@
 package home_work_7;
 
 import home_work_7.api.ISearchEngine;
+import home_work_7.decorators.SearchEngineCaseInsensitive;
 import home_work_7.searchUtils.EasySearch;
 import home_work_7.searchUtils.RegExSearch;
 
@@ -9,24 +10,16 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
 
-public class Words {
+public class WordsFromTextUtil {
 
     // убрать точку входа, заменить на тестирование
     public static void main(String[] args) {
         Set<String> uniqueWords = new HashSet<>();
-        Words w = new Words();
+        WordsFromTextUtil w = new WordsFromTextUtil();
         try {
             String text = Files.readString(Path.of("Homework\\WarAndPeace.txt"));
             w.uniqueWordsToSet(uniqueWords, text);
             w.topNWords(text, 10);
-            System.out.println("EasySearch");
-            w.numberOfRepeat(text, "война", new EasySearch());
-            w.numberOfRepeat(text, "и", new EasySearch());
-            w.numberOfRepeat(text, "мир", new EasySearch());
-            System.out.println("RegExSearch");
-            w.numberOfRepeat(text, "война", new RegExSearch());
-            w.numberOfRepeat(text, "и", new RegExSearch());
-            w.numberOfRepeat(text, "мир", new RegExSearch());
         } catch (IOException e) {
             System.out.println("Ошибка при чтении файла.");
         }
@@ -39,6 +32,7 @@ public class Words {
      */
     public String[] wordsFromText (String text) {
         text = text.replaceAll("[\\x00-\\x2C\\x2E-\\x2F\\x3A-\\x40\\x5B-\\x60\\x7B-\\x7F]+", " ");
+        text = text.replaceAll("(-){2,}?", "-");
         text = text.replaceAll(" -", " ");
         text = text.replaceAll("- ", " ");
         return text.split("\\s+");
@@ -87,8 +81,8 @@ public class Words {
         }
     }
 
-    public void numberOfRepeat (String text, String word, ISearchEngine search) {
-        // нужно вне зависимости от регистра, а некоторые наши поисковики учитывают регистр :(
-        System.out.println("Слово " + word + " повторяется в текст " + search.search(text, word) + " раз(а).");
+    public void wordRepeatCaseInsensitive (String text, String word, ISearchEngine searchEngine) {
+        SearchEngineCaseInsensitive s = new SearchEngineCaseInsensitive(searchEngine);
+        System.out.println("Слово \"" + word + "\" повторяется в текст " + s.search(text, word) + " раз(а).");
     }
 }

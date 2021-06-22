@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 public class RegExSearch implements ISearchEngine {
 
     /**
-     * Метод возвращает число, равно количеству повторений в тексте конкретного слова (с учетом регистра). Например, в
+     * Метод возвращает число, равное количеству повторений в тексте конкретного слова (с учетом регистра). Например, в
      * предложений "Майор Май Майя май" слово "Май" будет найдено 1 раз (учитывая четкое начало и конец слова).
      * @param text текст, в котором производится поиск
      * @param word искомое слово (с учетом регистра)
@@ -16,7 +16,7 @@ public class RegExSearch implements ISearchEngine {
      */
     @Override
     public long search(String text, String word) {
-        Pattern pattern = Pattern.compile("\\b"+word+"\\b");
+        Pattern pattern = Pattern.compile("\\b"+word+"\\b", Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(text);
         int result = 0;
         while (matcher.find()) {

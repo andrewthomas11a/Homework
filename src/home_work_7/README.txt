@@ -3,15 +3,17 @@
 Задание 1:		- Homework\\WarAndPeace.txt
 			(относительный путь)
 
-Задание 2:		- Words.java
+Задание 2:		- WordsFromTextUtil.java
 
 Задание 3:		- api.ISearchEngine.java
 
 Задание 4:
 	4.1:		- searchUtils.EasySearch.java
 	4.2:		- searchUtils.RegExSearch.java
+	4.3:		- decorators.SearchEngineCaseInsensitive.java
+	4.4:		- decorators.SearchEnginePunctuationNormalizer.java
 
-Задание 5:		- 
+Задание 5:		- test.WarAndPeaceTest.java
 
 Задание 6:		- 
 

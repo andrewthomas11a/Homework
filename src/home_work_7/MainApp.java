@@ -10,10 +10,6 @@ import java.nio.file.Path;
 
 public class MainApp {
     public static void main(String[] args) throws IOException {
-        /*
-        нужен список txt файлов!!!
-        кодировка UTF-8 !!!
-         */
 
         String userPath = "Homework\\books";
         System.out.println("Перед вами список книг (романов) Джеймса Хэдли Чейза:");
@@ -35,7 +31,8 @@ public class MainApp {
 
             System.out.println("Вы выбрали книгу \"" + list[numberOfBook - 1] + "\".");
 
-            // Может читать только UTF-8, судя по документация
+            // Может читать только UTF-8, судя по документации
+            // при попытке чтения файла другой кодировки выдает MalformedInputException
             String text = Files.readString(Path.of("Homework\\books\\" + list[numberOfBook - 1]));
             boolean clearOrNot = false;
             System.out.println("Очистить историю поиска и начать заново? Напишите \"yes\" для очистки или \"no\" для продолжения и нажмите Enter:");
