@@ -10,6 +10,8 @@ import java.nio.file.Path;
 import java.util.*;
 
 public class Words {
+
+    // убрать точку входа, заменить на тестирование
     public static void main(String[] args) {
         Set<String> uniqueWords = new HashSet<>();
         Words w = new Words();
@@ -28,7 +30,6 @@ public class Words {
         } catch (IOException e) {
             System.out.println("Ошибка при чтении файла.");
         }
-
     }
 
     /**
@@ -87,7 +88,7 @@ public class Words {
     }
 
     public void numberOfRepeat (String text, String word, ISearchEngine search) {
-        // нужно вне зависимости от регистра, а некоторые наши поисковики учитывают регистр
+        // нужно вне зависимости от регистра, а некоторые наши поисковики учитывают регистр :(
         System.out.println("Слово " + word + " повторяется в текст " + search.search(text, word) + " раз(а).");
     }
 }
