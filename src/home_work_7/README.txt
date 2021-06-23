@@ -13,11 +13,12 @@
 	4.3:		- decorators.SearchEngineCaseInsensitive.java
 	4.4:		- decorators.SearchEnginePunctuationNormalizer.java
 
-Задание 5:		- test.WarAndPeaceTest.java
+Задание 5:		- test.WordsFromTextUtilTest.java
 
-Задание 6:		- 
+Задание 6:		- test.SearchTest.java
 
 Задание 7:		- MainApp.java
 			- Homework\\books\\
 			(рабочая директорая - относительный путь)
-			- Homework\\result.txts
+			- Homework\\result.txt
+			(рабочая директорая - относительный путь)

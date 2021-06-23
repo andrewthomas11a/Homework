@@ -2,35 +2,20 @@ package home_work_7;
 
 import home_work_7.api.ISearchEngine;
 import home_work_7.decorators.SearchEngineCaseInsensitive;
-import home_work_7.searchUtils.EasySearch;
-import home_work_7.searchUtils.RegExSearch;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.*;
 
 public class WordsFromTextUtil {
 
-    // убрать точку входа, заменить на тестирование
-    public static void main(String[] args) {
-        Set<String> uniqueWords = new HashSet<>();
-        WordsFromTextUtil w = new WordsFromTextUtil();
-        try {
-            String text = Files.readString(Path.of("Homework\\WarAndPeace.txt"));
-            w.uniqueWordsToSet(uniqueWords, text);
-            w.topNWords(text, 10);
-        } catch (IOException e) {
-            System.out.println("Ошибка при чтении файла.");
-        }
-    }
-
     /**
      * Метод возвращает массив слов, использованных в тексте.
      * @param text текст, в котором производится поиск слов
-     * @return массив слов без знаков препинания
+     * @return массив слов String[] без знаков препинания
      */
     public String[] wordsFromText (String text) {
+        // все символы кроме "-" заменяем на пробел
+        // любое количество рядом стоящих либо отдельно стоящих "-" заменяем на пробелы
+        // используем пробел как delimiter
         text = text.replaceAll("[\\x00-\\x2C\\x2E-\\x2F\\x3A-\\x40\\x5B-\\x60\\x7B-\\x7F]+", " ");
         text = text.replaceAll("(-){2,}?", "-");
         text = text.replaceAll(" -", " ");
@@ -39,13 +24,13 @@ public class WordsFromTextUtil {
     }
 
     /**
-     * Метод помещает в переданную коллекцию Set<String> слова из текста и выдает сообщение о количестве слов,
-     * использованных для написания текста (без учета повторений).
+     * Метод помещает в переданную коллекцию Set<String> слова из массива слов без повторений и выдает сообщение
+     * о количестве слов, использованных для написания текста (без учета повторений).
      * @param set передаваемая коллекция Set<String>, в которую будут записаны использованные в тексте слова
-     * @param text текст, в котором производится поиск слов
+     * @param words массив слов
      */
-    public void uniqueWordsToSet (Set<String> set, String text) {
-        Collections.addAll(set, wordsFromText(text));
+    public void uniqueWordsToSet (Set<String> set, String[] words) {
+        Collections.addAll(set, words);
         System.out.println("В тексте было найдено " + set.size() + " уникальных слов.");
     }
 
@@ -69,12 +54,16 @@ public class WordsFromTextUtil {
         }
 
         List<Map.Entry<String, Integer>> sortedWordsByRepeat = new ArrayList<>(map.entrySet());
-        Comparator<Map.Entry<String, Integer>> comparator = (o1, o2) -> {return o2.getValue() - o1.getValue();};
-        //в целом можно и так:
-        //Comparator<Map.Entry<String, Integer>> comparator = Comparator.comparingInt(Map.Entry::getValue);
+        Comparator<Map.Entry<String, Integer>> comparator = (o1, o2) -> o2.getValue() - o1.getValue();
         sortedWordsByRepeat.sort(comparator);
 
-        for (int i = 0; i < quantityOfWords; i++) {
+
+        if (quantityOfWords > sortedWordsByRepeat.size()) {
+            System.out.println("Количество слов для вывода превышает количество использованных в тексте слов.");
+        }
+
+        int quantity = quantityOfWords > sortedWordsByRepeat.size() ? sortedWordsByRepeat.size() : quantityOfWords;
+        for (int i = 0; i < quantity; i++) {
             Map.Entry<String, Integer> entry = sortedWordsByRepeat.get(i);
             System.out.println("Слово \"" + entry.getKey() + "\" - " +
                     entry.getValue() + " раз.");
