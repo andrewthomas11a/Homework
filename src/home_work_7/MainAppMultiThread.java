@@ -14,7 +14,7 @@ import java.util.concurrent.*;
 public class MainAppMultiThread {
     public static void main(String[] args) throws IOException {
 
-        String userPath = "Homework\\books";
+        String userPath = "books";
         System.out.println("Перед вами список книг (романов) Джеймса Хэдли Чейза:");
         // File вроде бы не выдает exception, если путь неверный
         File booksPath = new File(userPath);
@@ -39,7 +39,7 @@ public class MainAppMultiThread {
 
             // вложенный try-catch.
             // не знаю как по-другому в конструктор передать полученное в ходе выполнения программы значение
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter("Homework\\result2.txt", !clearOrNot));) {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter("result2.txt", !clearOrNot));) {
                 System.out.println("Вводите искомое слово. Напишите \"stop\" чтобы закончить");
                 ExecutorService exe;
                 while (true) {
@@ -98,7 +98,7 @@ class SearchInFile implements Callable<Long> {
     @Override
     public Long call() throws IOException {
         long result;
-        String bookText = Files.readString(Path.of("Homework\\books\\" + fileName));
+        String bookText = Files.readString(Path.of("books\\" + fileName));
         ISearchEngine findWord = new RegExSearch();
         result = findWord.search(bookText, word);
         writer.write("\"" + fileName + "\" - " + word + " - " + result+"\n");
