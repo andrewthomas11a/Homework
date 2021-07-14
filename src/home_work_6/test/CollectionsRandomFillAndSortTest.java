@@ -2,8 +2,7 @@ package home_work_6.test;
 
 import home_work_6.compatarors.*;
 import home_work_6.dto.*;
-import home_work_6.suppliers.GetAnimalRandom;
-import home_work_6.suppliers.GetPersonRandom;
+import home_work_6.suppliers.*;
 import home_work_6.utils.*;
 import org.junit.jupiter.api.*;
 

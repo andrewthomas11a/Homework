@@ -6,72 +6,102 @@ import utils_temp.InputCheck;
 import java.io.*;
 import java.nio.charset.MalformedInputException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 
 public class MainApp {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
 
-        String userPath = "Homework\\books";
+        String userPath = "books";
         System.out.println("Перед вами список книг (романов) Джеймса Хэдли Чейза:");
         // File вроде бы не выдает exception, если путь неверный
-        File booksPath = new File(userPath);
-        String[] list = booksPath.list();
+        File booksDirectory = new File(userPath);
+        File[] booksFiles = booksDirectory.listFiles((dir, name) -> name.endsWith(".txt"));
 
-        try (BufferedReader userInput = new BufferedReader(new InputStreamReader(System.in))){
-            for (int i = 0; i < list.length; i++) {
-                System.out.println(i + 1 + ". " + list[i]);
-            }
-            System.out.println("Выберите нужную книгу. Для выбора напишите номер и нажмите Enter.");
-            InputCheck inputBookNumber = new InputCheck("Нужно ввести номер книги, попробуйте еще раз.");
-            int numberOfBook = inputBookNumber.checkIntInput();
-            while (numberOfBook < 0 || numberOfBook > list.length) {
-                System.out.println("Книги с таким номером нет в списке! Попрообуйте еще раз.");
-                numberOfBook = inputBookNumber.checkIntInput();
+        if (booksFiles == null || booksFiles.length == 0) {
+            System.out.println("В директории нет текстовых файлов.");
+            return;
+        }
+
+        try (BufferedReader userInput = new BufferedReader(new InputStreamReader(System.in))) {
+            for (int i = 0; i < booksFiles.length; i++) {
+                System.out.println(i + 1 + ". " + booksFiles[i].getName());
             }
 
-            System.out.println("Вы выбрали книгу \"" + list[numberOfBook - 1] + "\".");
+            // используем метод для выбора номера книги в корректном диапазоне (с проверкой)
+            int numberOfBook = choseBook(booksFiles.length);
+            File chosenBookFile = booksFiles[numberOfBook-1];
+            System.out.println("Вы выбрали книгу \"" + numberOfBook + ". " + chosenBookFile.getName() + "\".");
 
-            // Может читать только UTF-8, судя по документации
-            // при попытке чтения файла другой кодировки выдает MalformedInputException
-            String text = Files.readString(Path.of("Homework\\books\\" + list[numberOfBook - 1]));
+            // используем метод для выбора - продолжить запись с файл или начать заново (с проверкой)
+            boolean clearOrNot = outFileClearOrContinue(userInput);
 
-            System.out.println("Очистить историю поиска и начать заново? Напишите \"yes\" для очистки или \"no\" для продолжения и нажмите Enter:");
-            String userWantToClear = userInput.readLine();
-            while (!userWantToClear.equals("yes") && !userWantToClear.equals("no")) {
-                System.out.println("Вы указали что-то не то, попробуйте еще раз (yes/no):");
-                userWantToClear = userInput.readLine();
-            }
-            boolean clearOrNot = false;
-            if (userWantToClear.equals("yes")) {
-                clearOrNot = true;
-            }
-            // вложенный try-catch.
-            // не знаю как по-другому в конструктор передать полученное в ходе выполнения программы значение
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter("Homework\\result.txt", !clearOrNot));) {
-                System.out.println("Вводите искомое слово. Напишите \"stop\" чтобы закончить");
-                ISearchEngine findWord = new RegExSearch();
-                long result;
-                while (true) {
-                    // получаем от пользователя слово для поиска
-                    String word = userInput.readLine();
-                    // прерываем цикл если введено stop-слово
-                    if (word.equals("stop")) {
-                        break;
-                    }
-                    // если введено что-то еще - ищем слово в тексте
-                    result = findWord.search(text, word);
-                    // записываем в текстовый файл
-                    writer.write("\"" + list[numberOfBook - 1] + "\" - " + word + " - " + result+"\n");
-                }
-                writer.flush();
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter("result.txt", !clearOrNot))) {
+                searchWordsAndWriteToFile (chosenBookFile, new RegExSearch(), writer, userInput);
             }
             System.out.println("Результаты поиска были записаны в файл result.txt в директории Homework");
-        } catch (NullPointerException e) {
-            System.out.println("Что-то не то со ссылкой, в указанной директории ничего нет.");
         } catch (MalformedInputException e) {
             System.out.println("Невозмно прочитать книгу - она имеет неверный формат кодировки");
         } catch (IOException e) {
             System.out.println("Во время работы с файлом что-то пошло не так. Запустите программу заново");
         }
+    }
+
+    public static void searchWordsAndWriteToFile (File book, ISearchEngine searchEngine, BufferedWriter writer, BufferedReader reader) throws IOException{
+        System.out.println("Вводите искомое слово. Напишите \"stop\" чтобы закончить");
+        long result;
+        while (true) {
+            // получаем от пользователя слово для поиска
+            String word = reader.readLine();
+            // прерываем цикл если введено stop-слово
+            if (word.equals("stop")) {
+                break;
+            }
+            // если введено что-то еще - ищем слово в тексте
+            String bookText = Files.readString(book.toPath());
+            result = searchEngine.search(bookText, word);
+            // записываем в текстовый файл
+            writer.write("\"" + book.getName() + "\" - " + word + " - " + result+"\n");
+        }
+        writer.flush();
+    }
+
+    /**
+     * Метод для выбора книги, запрещающий пользователю вводить что-то кроме чисел типа int и числа за пределами
+     * заданного количества книг.
+     * @param listSize размер списка книг (размер массива)
+     * @return Выбранный пользователем порядковым номер. Это не номер элемента в массиве (от 0 до listSize), а
+     * именно порядковый номер (от 1 до listSize включительно). Для использования при обращении к массиву необходимо
+     * уменьшить на 1.
+     */
+    public static int choseBook (int listSize) {
+        System.out.println("Выберите нужную книгу. Для выбора напишите номер и нажмите Enter.");
+        InputCheck inputBookNumber = new InputCheck("Нужно ввести номер книги, попробуйте еще раз.");
+        int numberOfBook = inputBookNumber.checkIntInput();
+        while (numberOfBook <= 0 || numberOfBook > listSize) {
+            System.out.println("Книги с таким номером нет в списке! Попрообуйте еще раз.");
+            numberOfBook = inputBookNumber.checkIntInput();
+        }
+        return numberOfBook;
+
+    }
+
+    /**
+     * Метод спрашивает у пользователя - нужно ли очистить файл с результатами поиска и начать запись заново, либо
+     * продолжить запить.
+     * @param reader Передаваемый в метод BufferedReader (для общего использования в try с ресурсами)
+     * @return возвращает true, если файл необходимо очистить
+     * @throws IOException (необходимо обработать при выполнении программы)
+     */
+    public static boolean outFileClearOrContinue (BufferedReader reader) throws IOException {
+        System.out.println("Очистить историю поиска и начать заново? Напишите \"yes\" для очистки или \"no\" для продолжения и нажмите Enter:");
+        String userWantToClear = reader.readLine();
+        while (!userWantToClear.equals("yes") && !userWantToClear.equals("no")) {
+            System.out.println("Вы указали что-то не то, попробуйте еще раз (yes/no):");
+            userWantToClear = reader.readLine();
+        }
+        boolean clearOrNot = false;
+        if (userWantToClear.equals("yes")) {
+            clearOrNot = true;
+        }
+        return clearOrNot;
     }
 }

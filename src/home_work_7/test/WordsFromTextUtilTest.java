@@ -11,8 +11,6 @@ import java.util.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class WordsFromTextUtilTest {
-    // почему-то тест не хочет воспринимать относительный путь как Homework\WarAndPeace.txt...
-    // хотя в других классах работает именно так
     final String pathToFile = "WarAndPeace.txt";
     Set<String> uniqueWords = new HashSet<>();
     WordsFromTextUtil util = new WordsFromTextUtil();
